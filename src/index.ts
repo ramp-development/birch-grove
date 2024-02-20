@@ -1,7 +1,15 @@
-import { greetUser } from '$utils/greet';
+import { formatSliderDots } from '$utils/formatSliderDots';
+import { navClass } from '$utils/navClass';
+import { queryElements } from '$utils/queryElements';
+
+import { pages } from './pages';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
-  const name = 'John Doe';
-  greetUser(name);
+  pages();
+  navClass();
+  window.addEventListener('scroll', navClass);
+
+  const sliders = queryElements<HTMLDivElement>('[data-slider="slider"]');
+  if (sliders.length) formatSliderDots(sliders);
 });
